@@ -1,0 +1,137 @@
+
+—-This creates two tables and adds the selected countries information into the tables
+—-Carl Allen 
+—-Principals of Database
+
+CREATE TABLE countries(
+
+	countryName varchar(20), 
+
+	latitude varchar(8), 
+
+	longitude varchar(8),
+
+	area int,	
+
+	population int,
+
+	gdp real, 
+
+	gdpYear int
+
+     );
+
+
+
+
+
+INSERT INTO countries values('Germany', '51 00 N', '09 00 E', 357022, 80594017,3979.0, 2016), 
+
+	('Netherlands', '52 30 N', '05 45 E', 41543, 17084719, 870.8, 2016),
+
+	('Belgium', '50 50 N', '04 00 E', 30528, 11491346, 508.6, 2016), 
+
+	('Luxemburg', '49 45 N', '06 10 E', 2586, 594130, 58.74, 2016),
+
+	('Poland', '52 00 N', '20 00 E', 312685, 38476269, 1052, 2017),
+
+	('Czechia', '49 45 N', '15 30 E', 78869, 10674723, 350, 2016),
+
+	('Austria', '47 20 N', '13 20 E', 83871, 8754413, 416.6, 2016),
+
+	('Switzerland', '47 00 N', '08 00 E', 41277, 8236303, 496.3, 2016),
+
+	('France', '46 00 N', '02 00 E', 643801, 67106161, 2699, 2016),
+
+	('Denmark', '56 00 N', '10 00 E', 43094, 5605948, 264.8, 2016);
+
+
+
+CREATE TABLE borders(listedCountry varchar(20),
+
+	borderCountries varchar(20),
+
+	);
+
+	INSERT INTO borders values('Germany', 'Netherlands');
+
+	INSERT INTO borders values('Germany', 'Belgium');
+
+	INSERT INTO borders values('Germany', 'Luxemburg');
+
+	INSERT INTO borders values('Germany', 'Poland');
+
+	INSERT INTO borders values('Germany', 'Czechia');
+
+	INSERT INTO borders values('Germany', 'Austria');
+
+	INSERT INTO borders values('Germany', 'Switzerland');
+
+	INSERT INTO borders values('Germany', 'France');
+
+	INSERT INTO borders values('Germany', 'Denmark');
+
+	INSERT INTO borders values('Luxemburg', 'Germany');
+
+	INSERT INTO borders values('Poland', 'Germany');
+
+	INSERT INTO borders values('Czechia', 'Germany');
+
+	INSERT INTO borders values('Austria', 'Germany');
+
+	INSERT INTO borders values('Switzerland', 'Germany');
+
+	INSERT INTO borders values('France', 'Germany');
+
+	INSERT INTO borders values('Belgium', 'Germany');
+
+	INSERT INTO borders values('Netherlands', 'Germany');
+
+	INSERT INTO borders values('Denmark', 'Germany');
+
+
+
+
+
+—4B populate both tables with the informations
+
+
+SELECT *
+
+FROM countries
+
+INNER JOIN borders
+
+ON (countries.countryName = borders.listedCountry);
+
+
+
+—-4C all countries that border with Germany
+
+
+SELECT borderCountries
+
+FROM borders
+
+WHERE listedCountry = 'Germany';
+
+
+
+—-4D Population over 35 million
+
+SELECT countries.countryName
+
+FROM countries
+
+WHERE population > 35000000;
+
+
+
+—-4E Border with Germany and population over 35 million
+
+
+SELECT countries.countryName, borders.borderCountries
+
+FROM countries, borders
+
+WHERE (countries.population > 35000000) and (borders.listedCountry = 'Germany');
